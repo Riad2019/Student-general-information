@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Table, TableHead, TableCell, TableRow, TableBody, Button, makeStyles } from '@material-ui/core'
 import { Link } from 'react-router-dom';
 import { getUsers, deleteUser } from '../service/api';
-
+import Search from './Search';
 
 
 const useStyles = makeStyles({
@@ -33,11 +33,10 @@ const AllUser=()=>{
     const classes = useStyles();
     const [users,setUsers] = useState([]);
     
-
-
     useEffect(()=>{
         getAllUsers();
     },[])
+
     const deleteUserData =async(id)=>{
         await deleteUser(id);
         getAllUsers();
@@ -51,6 +50,8 @@ const getAllUsers = async()=>{
 
 
     return(
+        <>
+        <Search/>
         <Table className={classes.table}>
         <TableHead>
             <TableRow className={classes.thead}>
@@ -78,6 +79,7 @@ const getAllUsers = async()=>{
             ))}
         </TableBody>
     </Table>
+    </>
     )
 
 }
